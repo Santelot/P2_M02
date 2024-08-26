@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook-P2-M02</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .banner {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .banner .title {
+            font-size: 1.2em;
+            display: flex;
+            justify-content: space-between;
+        }
+        .banner .subtitle {
+            font-size: 1em;
+            margin-top: 5px;
+            border-top: 1px solid white;
+            padding-top: 5px;
+        }
+        .content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 15px;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: right;
+        }
+        .dialogue {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: right;
+            font-style: italic;
+        }
+        .dropdown {
+            margin-bottom: 20px;
+        }
+        .dropdown select {
+            font-size: 1em;
+            padding: 5px;
+            margin-left: 10px;
+        }
+        .time-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .note {
+            background-color: #ffeb3b;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .nav-buttons button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-buttons button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+    </style>
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+
+        function updateActivities() {
+            var selectedTime = document.getElementById('time-select').value;
+
+            document.getElementById('selected-time').innerText = "Tiempo efectivo de clase: " + selectedTime + " minutos";
+
+            // Mostrar todas las actividades por defecto
+            var activities = document.getElementsByClassName('activity');
+            for (var i = 0; i < activities.length; i++) {
+                activities[i].style.display = 'block';
+            }
+
+            // Ajustar según el tiempo seleccionado
+            if (selectedTime === '45') {
+                document.getElementById('activity-2').style.display = 'none';
+            } else if (selectedTime === '40') {
+                document.getElementById('activity-2').style.display = 'none';
+                document.getElementById('activity-4').style.display = 'none';
+            }
+        }
+
+        function navigateTo(id) {
+            var element = document.getElementById(id);
+            window.scrollTo({
+                top: element.offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</head>
+<body onload="updateActivities()">
+
+<div class="header">
+    <h1>Playbook</h1>
+</div>
+
+<div class="container">
+    <div class="dropdown">
+        <label for="time-select">Tiempo efectivo de Clase:</label>
+        <select id="time-select" onchange="updateActivities()">
+            <option value="50">50 minutos</option>
+            <option value="45">45 minutos</option>
+            <option value="40">40 minutos</option>
+        </select>
+    </div>
+
+    <h2 id="selected-time" class="time-title">Tiempo efectivo de clase: 50 minutos</h2>
+<!-- Actividad 0 (1 paso) -->
+<div id="activity-0" class="activity">
+    <div class="banner" onclick="toggleContent('revision-mision')">
+        <div class="title">
+            <span>📝 Actividad 0: Revisión Misión (1 paso)</span>
+            <span>⏰ Tiempo: N/A minutos</span>
+        </div>
+        <div class="subtitle">Revisar los materiales y herramientas antes de comenzar la clase</div>
+        <div class="summary">Revisar que los materiales estén listos y que las herramientas estén en buen estado.</div>
+    </div>
+    <div id="revision-mision" class="content">
+        <div class="section">
+            <div class="step-title">Paso 1: Revisar que los materiales estén listos y que las herramientas estén en buen estado</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">N/A</div>
+        </div>
+    </div>
+</div>
+<!-- Actividad 1 (4 pasos) -->
+<div id="activity-1" class="activity">
+    <div class="banner" onclick="toggleContent('saludo-ritual')">
+        <div class="title">
+            <span>📚 Actividad 1: Saludo y Ritual Gnius Club (4 pasos)</span>
+            <span>⏰ Tiempo: 4 minutos</span>
+        </div>
+        <div class="subtitle">Iniciar la clase y preparar a los estudiantes para la misión</div>
+        <div class="summary">Saludar a los estudiantes, escanear cómo se sienten, agradecerles y explicar los objetivos de la misión.</div>
+    </div>
+    <div id="saludo-ritual" class="content">
+        <div class="section">
+            <div class="step-title">Paso 1 (0.5 minutos): Proyectar Diapositiva 1 "Gnius Club"</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"¡Buenos días, jóvenes narradores! Hoy tenemos una misión creativa. Vamos a crear personajes que llenarán nuestras historias de vida y color. ¿Están listos?"</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 2 (1 minuto): Proyectar Diapositiva 2 "¿Cómo están?" y escanear cómo se sienten los estudiantes</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Antes de pasar a nuestro agradecimiento, me gustaría saber cómo están. Si se sienten emocionados por crear personajes, levanten el puño. Si necesitan un poco de energía, crucen los brazos."</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 3 (1 minuto): Proyectar Diapositiva 3 "Gracias por Asistir"</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Vamos a juntar nuestras manos en agradecimiento por la oportunidad de aprender algo nuevo hoy. ¡Gracias por Asistir!"</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 4 (1.5 minutos): Proyectar Diapositiva 4 "Objetivos de la Misión"</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Hoy tenemos tres objetivos: Crear personajes, describir sus características, y compartir nuestras creaciones con el grupo."</div>
+        </div>
+    </div>
+</div>
+<!-- Actividad 2 (2 pasos) -->
+<div id="activity-2" class="activity">
+    <div class="banner" onclick="toggleContent('state-change')">
+        <div class="title">
+            <span>🔄 Actividad 2: State Change (2 pasos)</span>
+            <span>⏰ Tiempo: 2 minutos</span>
+        </div>
+        <div class="subtitle">Activación cerebral y preparación para la creación de personajes</div>
+        <div class="summary">Guiar a los estudiantes en un ejercicio de visualización y respiración para concentrarse.</div>
+    </div>
+    <div id="state-change" class="content">
+        <div class="section">
+            <div class="step-title">Paso 1 (1 minuto): Proyectar Diapositiva 5 "State Change"</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Antes de sumergirnos en la creación de personajes, vamos a hacer una rápida activación cerebral. Vamos a cerrar los ojos y pensar en el personaje más divertido que hayan visto en una película o en un libro. ¿Listos? Ahora, mientras piensan en ese personaje, imaginen cómo lo dibujarían en la magic tablet. ¡Vamos a relajarnos y concentrarnos!"</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 2 (1 minuto): Proyectar Diapositiva 6 y guiar a los estudiantes en una respiración profunda</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Ahora, respiren profundamente mientras visualizan a su personaje. Inhalen, sostengan el aire por tres segundos, y exhalen lentamente. Muy bien, ¡estamos listos para crear!"</div>
+        </div>
+    </div>
+</div>
+<!-- Actividad 3 (4 pasos) -->
+<div id="activity-3" class="activity">
+    <div class="banner" onclick="toggleContent('challenge')">
+        <div class="title">
+            <span>🏆 Actividad 3: Challenge (4 pasos)</span>
+            <span>⏰ Tiempo: 37.5 minutos</span>
+        </div>
+        <div class="subtitle">Creación de personajes utilizando las Magic Tablets</div>
+        <div class="summary">Guiar a los estudiantes en la creación de personajes y la descripción de sus características.</div>
+    </div>
+    <div id="challenge" class="content">
+        <div class="section">
+            <div class="step-title">Paso 1 (2 minutos): Proyectar Diapositiva 7 "Challenge"</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"¡Es hora de ser creativos, Genios! Hoy vamos a crear personajes utilizando las Magic Tablets. Pero no solo vamos a dibujar, también vamos a darles vida describiendo sus características. ¡Prepárense para dejar volar su imaginación!"</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 2 (1.5 minutos): Proyectar Diapositiva 8 y dar las instrucciones</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Primero, piensen en qué tipo de personaje quieren crear: ¿Será un héroe, un villano, un animal, o algo completamente diferente? Luego, utilicen las Magic Tablets trazando una línea a la mitad de la pantalla para dibujar a su personaje en una de las dos mitades. Finalmente, escriban una breve descripción de su personaje en la otra mitad: ¿Cómo se llama? ¿Qué le gusta? ¿Cuál es su misión en la historia?"</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 3 (30 minutos): Proyectar Diapositiva 9 Cronómetro de 30 minutos y dejar que los Genios trabajen</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Ahora tienen 30 minutos para dar vida a su personaje. Usen toda su creatividad. ¡Estoy ansioso por conocer a estos nuevos personajes!"</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 4 (4 minutos): Caminar por el aula, ofreciendo ayuda y motivación</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Recuerden que no hay respuestas incorrectas aquí. Lo importante es divertirse y ser creativos. Si necesitan ayuda, estoy aquí para guiarlos."</div>
+        </div>
+    </div>
+</div>
+<!-- Actividad 4 (2 pasos) -->
+<div id="activity-4" class="activity">
+    <div class="banner" onclick="toggleContent('team-gnius')">
+        <div class="title">
+            <span>🤝 Actividad 4: Team Gnius (2 pasos)</span>
+            <span>⏰ Tiempo: 2 minutos</span>
+        </div>
+        <div class="subtitle">Formación de equipos y colaboración</div>
+        <div class="summary">Organizar a los estudiantes en equipos y guiar la actividad de compartir creaciones.</div>
+    </div>
+    <div id="team-gnius" class="content">
+        <div class="section">
+            <div class="step-title">Paso 1 (1 minuto): Proyectar Diapositiva 10 "Team Gnius"</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Ahora vamos a formar equipos de cuatro. Tienen 30 segundos para decidir con quién van a trabajar. ¡Escojan a sus compañeros y prepárense para compartir sus creaciones!"</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 2 (1 minuto): Proyectar Diapositiva 11 y guiar a los estudiantes en la actividad</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Cada miembro del equipo compartirá su personaje con los demás. Recuerden que al escuchar las ideas creativas de los otros, nuestra propia creatividad también crece. ¡Cuanto más compartimos, más grandes se vuelven nuestras ideas!"</div>
+        </div>
+    </div>
+</div>
+<!-- Actividad 5 (3 pasos) -->
+<div id="activity-5" class="activity">
+    <div class="banner" onclick="toggleContent('honor-dojo')">
+        <div class="title">
+            <span>🏅 Actividad 5: Honor de Dojo (3 pasos)</span>
+            <span>⏰ Tiempo: 5.5 minutos</span>
+        </div>
+        <div class="subtitle">Reflexión y cierre de la clase</div>
+        <div class="summary">Guiar a los estudiantes en la reflexión sobre lo aprendido, felicitarlos por su esfuerzo, y organizar el espacio de trabajo.</div>
+    </div>
+    <div id="honor-dojo" class="content">
+        <div class="section">
+            <div class="step-title">Paso 1 (2 minutos): Guiar a los estudiantes en una breve reflexión sobre lo que han aprendido, cómo trabajaron juntos en la creación de personajes, y pedir que compartan sus ideas</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Genios, han hecho un trabajo maravilloso hoy creando personajes increíbles. Tomémonos un momento para reflexionar sobre lo que aprendimos y cómo colaboramos en equipo, ¿Cómo creen que los creadores de las películas hacen a sus personajes?"</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 2 (2 minutos): Felicitar a los equipos por su creatividad y esfuerzo en la creación de personajes</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Estoy muy orgulloso de cómo cada equipo trabajó en sus personajes. ¡Han demostrado ser grandes creadores! Vamos a celebrar estos logros."</div>
+        </div>
+        <div class="section">
+            <div class="step-title">Paso 3 (1.5 minutos): Guiar a los estudiantes en la recolección de materiales y limpieza del área de trabajo</div>
+            <div class="section-title">Diálogo del Maestro</div>
+            <div class="dialogue">"Para finalizar, vamos a asegurarnos de que nuestro espacio de trabajo quede limpio y ordenado. ¡Es importante respetar el lugar donde creamos grandes ideas!"</div>
+        </div>
+    </div>
+</div>
+</div> <!-- Cierre del container -->
+
+<!-- Scripts adicionales si es necesario -->
+<script>
+    // Agregar scripts adicionales aquí si es necesario
+</script>
+
+</body>
+</html>
